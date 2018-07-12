@@ -1,13 +1,6 @@
 package com.baomidou.springboot.controller;
 
-import java.util.Date;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.api.ApiAssert;
@@ -20,6 +13,12 @@ import com.baomidou.springboot.entity.User;
 import com.baomidou.springboot.entity.enums.AgeEnum;
 import com.baomidou.springboot.entity.enums.PhoneEnum;
 import com.baomidou.springboot.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 代码生成器，参考源码测试用例：
@@ -119,6 +118,20 @@ public class UserController extends ApiController {
     @GetMapping("/selectsql")
     public Object getUserBySql() {
         return userService.selectListBySQL();
+    }
+
+    @GetMapping("/userName/{name}")
+    public List<User> getName(@PathVariable String name){
+        User user = new User();
+        user.setName(name);
+        Wrapper<User> wp = new QueryWrapper<User>(user);
+        return userService.selectList(wp);
+    }
+
+    @PostMapping("/user")
+    public User update(@RequestBody User user){
+         userService.updateById(user);
+         return user;
     }
 
     /**

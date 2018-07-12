@@ -1,12 +1,10 @@
 package com.baomidou.springboot.entity;
 
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.springboot.entity.enums.AgeEnum;
 import com.baomidou.springboot.entity.enums.PhoneEnum;
+
+import java.util.Date;
 
 /**
  * 用户表
@@ -18,6 +16,7 @@ public class User extends SuperEntity<User> {
     /**
      * 名称
      */
+    @TableField(condition = SqlCondition.LIKE)
     private String name;
     /**
      * 年龄
@@ -39,6 +38,8 @@ public class User extends SuperEntity<User> {
     private Long role;
     private PhoneEnum phone;
 
+    private String code;
+
     public User() {
     }
 
@@ -55,6 +56,15 @@ public class User extends SuperEntity<User> {
         this.testType = testType;
     }
 
+    public String getCode()
+    {
+        return code;
+    }
+
+    public void setCode(String code)
+    {
+        this.code = code;
+    }
 
     public String getName() {
         return this.name;
@@ -103,6 +113,7 @@ public class User extends SuperEntity<User> {
     public void setTestDate(Date testDate) {
         this.testDate = testDate;
     }
+
 
     @Override
     public String toString() {

@@ -17,7 +17,7 @@ spring:
     username: sa
     password: sa
     platform: h2
-    initialize: true
+#    initialize: true
     continue-on-error: true
   h2:
     console:
@@ -55,4 +55,13 @@ mybatis-plus:
     cache-enabled: false
 ##logging
 #logging:
-#  level: warn
+#  level: info
+
+
+## 添加sql日志输出   logging.level.Mapper类的包=debug
+logging:
+  level:
+    com:
+      baomidou:
+        springboot:
+          mapper: debug

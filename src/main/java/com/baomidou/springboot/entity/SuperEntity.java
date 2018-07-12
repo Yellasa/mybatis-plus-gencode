@@ -1,9 +1,10 @@
 package com.baomidou.springboot.entity;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
+import java.io.Serializable;
 
 /**
  * 演示实体父类
@@ -16,6 +17,8 @@ public class SuperEntity<T extends Model> extends Model<T> {
     @TableId("test_id")
     private Long id;
     private Long tenantId;
+    @Version
+    private Integer version;
 
     public Long getId() {
         return this.id;
@@ -32,6 +35,16 @@ public class SuperEntity<T extends Model> extends Model<T> {
     public SuperEntity setTenantId(Long tenantId) {
         this.tenantId = tenantId;
         return this;
+    }
+
+    public Integer getVersion()
+    {
+        return version;
+    }
+
+    public void setVersion(Integer version)
+    {
+        this.version = version;
     }
 
     @Override
